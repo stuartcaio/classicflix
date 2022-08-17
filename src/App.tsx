@@ -1,42 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { Cabecalho, Corpo, Principal, TítuloDoCabecalho, Imagem, Título, Filmes, Filme, Botao } from './styles';
 import './App.css';
 
 function App() {
 
-  const [filmes, setFilmes] = useState([
-    {
-      id: 1,
-      title: 'The Lord of the Rings - The Fellowship Ring',
-      image: 'https://upload.wikimedia.org/wikipedia/pt/3/38/Lord_of_the_Rings_Fellowship_of_the_Ring.jpg',
-      name: 'The Lord of the Rings'
-    },
-    {
-      id: 2,
-      title: 'The Lord of the Rings - The Two Towers',
-      image: 'https://upload.wikimedia.org/wikipedia/pt/5/59/The_Lord_of_the_Rings_The_Two_Towers.jpg',
-      name: 'The Lord of the Rings'
-    },
-    {
-      id: 3,
-      title: 'The Lord of the Rings - The Return of the King',
-      image: 'https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
-      name: 'The Lord of the Rings'
-    }
-  ])
+  const [filmes, setFilmes] = useState([]);
 
-  fetch('https://api.themoviedb.org/3/movie/550?api_key=ce55d6ef64d74744c9ce770e6229d6e0', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then((resp) => resp.json)
-  .then((data: any) => 
-    console.log(data)
-  )
-  .catch((err) => console.log(err));
+  useEffect(() => {
+    fetch('https://api.themoviedb.org/3/movie/popular?api_key=ce55d6ef64d74744c9ce770e6229d6e0&language=en-US&page=1')
+    .then((resp) => resp.json())
+    .then((data: any) => 
+      setFilmes(data.results)
+    )
+    .catch((err) => console.log(err));
+  }, [])
 
   return(
     <Corpo>
@@ -48,10 +26,10 @@ function App() {
       <hr/>
       <Principal>
         <Filmes>
-          {filmes.map((filme) => (
-            <Filme>
-            <Imagem src={filme.image} alt=""/>
-            <Título>{filme.name}</Título>
+          {filmes.map((filme: any) => (
+            <Filme key={filme.id}>
+            <Imagem src={'https://image.tmdb.org/t/p/w500' + filme.poster_path} alt=""/>
+            <Título>{filme.title}</Título>
             <Botao>Detalhes</Botao>
             </Filme>
           ))}

@@ -4,9 +4,6 @@ import styled from 'styled-components';
 export const Corpo = styled.body`
 background-color: black;
 
-width: 100vw;
-height: 100vh;
-
 margin: 0rem;
 `;
 
@@ -31,7 +28,8 @@ margin-top: 4rem;
 
 export const Filmes = styled.section`
 display: flex;
-justify-content: space-around;
+flex-wrap: wrap;
+gap: 1.25rem;
 `;
 
 export const Filme = styled.div`
@@ -55,6 +53,12 @@ font-size: 1.2rem;
 font-weight: 400;
 
 width: 75%;
+
+transition: 1s;
+
+&:hover{
+    background-color: rgb(255, 225, 179)
+}
 `;
 
 export const Imagem = styled.img`
