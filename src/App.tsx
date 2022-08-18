@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { Cabecalho, Corpo, Principal, TítuloDoCabecalho, Imagem, Título, Filmes, Filme, Botao } from './styles';
+import { Cabecalho, Corpo, Principal, TítuloDoCabecalho, Imagem, Título, Filmes, Filme, Botao, Input } from './styles';
 import './App.css';
 
 function App() {
@@ -16,12 +16,17 @@ function App() {
     .catch((err) => console.log(err));
   }, [])
 
+  function filtraElemento(e: string | number){
+    const filmesFiltrados = filmes.filter((dado: any) => dado.title.includes(e));
+    setFilmes(filmesFiltrados);
+  }
+
   return(
     <Corpo>
       <Cabecalho>
         <img src={require('./img/logo.png')} className="cabecalho__imagem1" alt=""/>
         <TítuloDoCabecalho>CLASSICFLIX</TítuloDoCabecalho>
-        <img src={require('./img/navbar.png')} className="cabecalho__imagem2" alt=""/>
+        <Input placeholder="Procure um filme" onChange={(e) => filtraElemento(e.target.value)}></Input>
       </Cabecalho>
       <hr/>
       <Principal>

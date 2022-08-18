@@ -11,6 +11,7 @@ export const Cabecalho = styled.header`
 display: flex;
 justify-content: space-around;
 align-items: center;
+gap: 25rem;
 
 height: 15vh;
 
@@ -20,6 +21,12 @@ color: white;
 export const TítuloDoCabecalho = styled.h1`
 font-size: 1.5rem;
 font-weight: 400;
+`;
+
+export const Input = styled.input`
+padding: 0.75rem;
+
+border-radius: 7.5px;
 `;
 
 export const Principal = styled.main`
