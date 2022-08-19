@@ -48,7 +48,7 @@ gap: 1rem;
 
 padding: 1rem;
 
-background-color: rgb(10, 10, 10)
+background-color: rgb(10, 10, 10);
 `;
 
 export const Botao = styled.button`
@@ -59,7 +59,7 @@ color: black;
 font-size: 1.2rem;
 font-weight: 400;
 
-width: 75%;
+width: 12rem;
 
 transition: 1s;
 

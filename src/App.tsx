@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { Cabecalho, Corpo, Principal, TítuloDoCabecalho, Imagem, Título, Filmes, Filme, Botao, Input } from './styles';
+import {Link} from 'react-router-dom';
 import './App.css';
 
 function App() {
-
   const [filmes, setFilmes] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function App() {
       setFilmes(data.results)
     )
     .catch((err) => console.log(err));
-  }, [])
+  }, []);
 
   function filtraElemento(e: string | number){
     const filmesFiltrados = filmes.filter((dado: any) => dado.title.includes(e));
@@ -22,25 +22,27 @@ function App() {
   }
 
   return(
-    <Corpo>
-      <Cabecalho>
-        <img src={require('./img/logo.png')} className="cabecalho__imagem1" alt=""/>
-        <TítuloDoCabecalho>CLASSICFLIX</TítuloDoCabecalho>
-        <Input placeholder="Procure um filme" onChange={(e) => filtraElemento(e.target.value)}></Input>
-      </Cabecalho>
-      <hr/>
-      <Principal>
-        <Filmes>
-          {filmes.map((filme: any) => (
-            <Filme key={filme.id}>
-            <Imagem src={'https://image.tmdb.org/t/p/w500' + filme.poster_path} alt=""/>
-            <Título>{filme.title}</Título>
-            <Botao>Detalhes</Botao>
-            </Filme>
-          ))}
-        </Filmes>
-      </Principal>
-    </Corpo>
+      <Corpo>
+        <Cabecalho>
+          <img src={require('./img/logo.png')} className="cabecalho__imagem1" alt=""/>
+          <TítuloDoCabecalho>CLASSICFLIX</TítuloDoCabecalho>
+          <Input placeholder="Procure um filme" onChange={(e) => filtraElemento(e.target.value)}></Input>
+        </Cabecalho>
+        <hr/>
+        <Principal>
+          <Filmes>
+            {filmes.map((filme: any) => (
+              <Filme key={filme.id}>
+              <Imagem src={'https://image.tmdb.org/t/p/w500' + filme.poster_path} alt=""/>
+              <Título>{filme.title}</Título>
+              <Link to={`/detalhes/${filme.id}`}>
+                <Botao>Detalhes</Botao>
+              </Link>
+              </Filme>
+            ))}
+          </Filmes>
+        </Principal>
+      </Corpo>
   )
 }
 
